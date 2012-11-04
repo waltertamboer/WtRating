@@ -42,6 +42,7 @@
 namespace WtRating\Service;
 
 use WtRating\Entity\Rating;
+use WtRating\Entity\RatingSet;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 
@@ -76,6 +77,17 @@ class RatingService implements ServiceManagerAwareInterface
             $this->mapper = $this->serviceManager->get('wtrating.mapper');
         }
         return $this->mapper;
+    }
+
+    /**
+     * Gets the set of ratings for the given type id.
+     *
+     * @param string $typeId The type identifier to get the set of ratings for.
+     * @return RatingSet
+     */
+    public function getRatingSet($typeId)
+    {
+        return $this->getMapper()->getRatingSet($typeId);
     }
 
     /**

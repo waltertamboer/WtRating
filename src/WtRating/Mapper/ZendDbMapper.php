@@ -42,7 +42,10 @@
 namespace WtRating\Mapper;
 
 use WtRating\Entity\Rating;
+use WtRating\Entity\RatingSet;
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Sql;
 use Zend\Db\TableGateway\TableGateway;
 
 class ZendDbMapper implements MapperInterface
@@ -56,7 +59,7 @@ class ZendDbMapper implements MapperInterface
 
     /**
      * The table gateway for the rating database table.
-     * 
+     *
      * @var TableGateway
      */
     private $gateway;
@@ -70,6 +73,31 @@ class ZendDbMapper implements MapperInterface
     {
         $this->dbAdapter = $dbAdapter;
         $this->gateway = new TableGateway('rating', $this->dbAdapter);
+    }
+
+    /**
+     * Gets the set of ratings for the given type id.
+     *
+     * @param string $typeId The type identifier to get the set of ratings for.
+     * @return RatingSet
+     */
+    public function getRatingSet($typeId)
+    {
+        $adapter = $this->gateway->getAdapter();
+        $sql = new Sql($adapter);
+
+        $select = $sql->select();
+        $select->from($this->gateway->getTable());
+        $select->columns(array(
+            'amount' => new Expression('COUNT(rating)'),
+            'avarage' => new Expression('AVG(rating)'),
+            'minimum' => new Expression('MAX(rating)'),
+            'maximum' => new Expression('MIN(rating)'),
+        ), false);
+
+        $rowset = $this->gateway->selectWith($select);
+
+        return new RatingSet($typeId, $rowset->current());
     }
 
     /**

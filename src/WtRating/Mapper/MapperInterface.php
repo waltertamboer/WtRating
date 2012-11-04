@@ -46,6 +46,14 @@ use WtRating\Entity\Rating;
 interface MapperInterface
 {
     /**
+     * Gets the set of ratings for the given type id.
+     *
+     * @param string $typeId The type identifier to get the set of ratings for.
+     * @return RatingSet
+     */
+    public function getRatingSet($typeId);
+
+    /**
      * Saves the given rating to the storage system.
      *
      * @param Rating $rating The rating to persist.

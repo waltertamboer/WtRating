@@ -39,41 +39,22 @@
  * @link        http://waltertamboer.nl
  */
 
-namespace WtRating;
+namespace WtRating\View\Helper;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
+use Zend\View\Helper\AbstractHtmlElement;
 
-class Module implements AutoloaderProviderInterface, ServiceProviderInterface, ViewHelperProviderInterface
+class RatingHelper extends AbstractHtmlElement
 {
-
-    public function getAutoloaderConfig()
+    public function __invoke($ratingSet, array $attributes = array(), $tag = 'span')
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
-    }
+        $attributes['data-rating-type-id'] = $ratingSet->getTypeId();
+        $attributes['data-rating-amount'] = $ratingSet->getAmount();
+        $attributes['data-rating-avarage'] = $ratingSet->getAvarage();
+        $attributes['data-rating-highest'] = $ratingSet->getHighest();
+        $attributes['data-rating-lowest'] = $ratingSet->getLowest();
 
-    public function getServiceConfig()
-    {
-        return include __DIR__ . '/config/services.config.php';
-    }
+        $attributes = $this->htmlAttribs($attributes);
 
-    public function getViewHelperConfig()
-    {
-        return array(
-            'invokables' => array(
-                'wtRating' => 'WtRating\View\Helper\RatingHelper'
-            )
-        );
+        return htmlspecialchars('<' . $tag . $attributes . '></' . $tag . '>');
     }
-
 }

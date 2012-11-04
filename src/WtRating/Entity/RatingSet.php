@@ -39,41 +39,50 @@
  * @link        http://waltertamboer.nl
  */
 
-namespace WtRating;
+namespace WtRating\Entity;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
-
-class Module implements AutoloaderProviderInterface, ServiceProviderInterface, ViewHelperProviderInterface
+/**
+ * A set of ratings.
+ */
+class RatingSet
 {
+    private $typeId;
+    private $amount;
+    private $avarage;
+    private $highest;
+    private $lowest;
 
-    public function getAutoloaderConfig()
+    public function __construct($typeId, $data)
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+        $this->typeId = $typeId;
+        $this->amount = $data['amount'];
+        $this->avarage = $data['avarage'];
+        $this->highest = $data['minimum'];
+        $this->lowest = $data['maximum'];
     }
 
-    public function getServiceConfig()
+    public function getAmount()
     {
-        return include __DIR__ . '/config/services.config.php';
+        return $this->amount;
     }
 
-    public function getViewHelperConfig()
+    public function getAvarage()
     {
-        return array(
-            'invokables' => array(
-                'wtRating' => 'WtRating\View\Helper\RatingHelper'
-            )
-        );
+        return $this->avarage;
     }
 
+    public function getHighest()
+    {
+        return $this->highest;
+    }
+
+    public function getLowest()
+    {
+        return $this->lowest;
+    }
+
+    public function getTypeId()
+    {
+        return $this->typeId;
+    }
 }
