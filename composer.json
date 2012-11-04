@@ -1,5 +1,5 @@
 {
-    "name": "WalterTamboer/WtRating",
+    "name": "waltertamboer/wtrating",
     "description": "A Zend Framework 2 module that provides functionality to rate or like something.",
     "type": "library",
     "keywords": [
