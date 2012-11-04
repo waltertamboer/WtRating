@@ -55,6 +55,6 @@ class RatingHelper extends AbstractHtmlElement
 
         $attributes = $this->htmlAttribs($attributes);
 
-        return htmlspecialchars('<' . $tag . $attributes . '></' . $tag . '>');
+        return '<' . $tag . $attributes . '></' . $tag . '>';
     }
 }
