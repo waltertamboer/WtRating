@@ -47,13 +47,18 @@ use Zend\Db\TableGateway\TableGateway;
 
 class ZendDbMapper implements MapperInterface
 {
-
     /**
      * The database adapter that is used.
      *
      * @var Adapter
      */
     private $dbAdapter;
+
+    /**
+     * The table gateway for the rating database table.
+     * 
+     * @var TableGateway
+     */
     private $gateway;
 
     /**
