@@ -46,41 +46,104 @@ namespace WtRating\Entity;
  */
 class RatingSet
 {
+    /**
+     * The type id that this set represents.
+     *
+     * @var string
+     */
     private $typeId;
+
+    /**
+     * The amount of times a rating was casted.
+     *
+     * @var int
+     */
     private $amount;
+
+    /**
+     * The avarage rating.
+     *
+     * @var int
+     */
     private $avarage;
+
+    /**
+     * The highest rating that was given.
+     *
+     * @var int
+     */
     private $highest;
+
+    /**
+     * The lowest rating that was given.
+     *
+     * @var int
+     */
     private $lowest;
 
-    public function __construct($typeId, $data)
+    /**
+     * Initialize the instance of this class.
+     *
+     * @param string $typeId The type id that is represented.
+     * @param int $amount
+     * @param int $avarage
+     * @param int $highest
+     * @param int $lowest
+     */
+    public function __construct($typeId, $amount, $avarage, $highest, $lowest)
     {
         $this->typeId = $typeId;
-        $this->amount = $data['amount'];
-        $this->avarage = $data['avarage'];
-        $this->highest = $data['minimum'];
-        $this->lowest = $data['maximum'];
+        $this->amount = $amount;
+        $this->avarage = $avarage;
+        $this->highest = $highest;
+        $this->lowest = $lowest;
     }
 
+    /**
+     * Gets the amount of ratings that are given.
+     *
+     * @return int
+     */
     public function getAmount()
     {
         return $this->amount;
     }
 
+    /**
+     * Gets the avarage rating.
+     *
+     * @return int
+     */
     public function getAvarage()
     {
         return $this->avarage;
     }
 
+    /**
+     * Gets the highest rating.
+     *
+     * @return int
+     */
     public function getHighest()
     {
         return $this->highest;
     }
 
+    /**
+     * Gets the lowest rating.
+     *
+     * @return int
+     */
     public function getLowest()
     {
         return $this->lowest;
     }
 
+    /**
+     * Gets the type id.
+     *
+     * @return string
+     */
     public function getTypeId()
     {
         return $this->typeId;

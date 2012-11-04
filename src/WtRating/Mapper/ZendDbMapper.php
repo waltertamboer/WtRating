@@ -91,13 +91,14 @@ class ZendDbMapper implements MapperInterface
         $select->columns(array(
             'amount' => new Expression('COUNT(rating)'),
             'avarage' => new Expression('AVG(rating)'),
-            'minimum' => new Expression('MAX(rating)'),
-            'maximum' => new Expression('MIN(rating)'),
+            'highest' => new Expression('MAX(rating)'),
+            'lowest' => new Expression('MIN(rating)'),
         ), false);
 
         $rowset = $this->gateway->selectWith($select);
+        $row = $rowset->current();
 
-        return new RatingSet($typeId, $rowset->current());
+        return new RatingSet($typeId, $row['amount'], $row['avarage'], $row['highest'], $row['lowest']);
     }
 
     /**
