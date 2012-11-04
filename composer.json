@@ -1,0 +1,25 @@
+{
+    "name": "WalterTamboer/WtRating",
+    "description": "A Zend Framework 2 module that provides functionality to rate or like something.",
+    "type": "library",
+    "keywords": [
+        "zf2",
+        "rating",
+        "like"
+    ],
+    "homepage": "https://github.com/WalterTamboer/WtRating",
+    "authors": [
+        {
+            "name": "Walter Tamboer",
+            "email": "walter.tamboer@live.com",
+            "homepage": "http://waltertamboer.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3.",
+        "zendframework/zendframework": "dev-master"
+    },
+    "autoload": {
+        "classmap": ["./"]
+    }
+}
